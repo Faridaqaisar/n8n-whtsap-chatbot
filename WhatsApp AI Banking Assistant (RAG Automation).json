@@ -1,0 +1,540 @@
+{
+  "name": "WhatsApp AI Banking Assistant (RAG Automation)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {
+          "messageStatusUpdates": [
+            "all"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1280,
+        -512
+      ],
+      "id": "192cd0fa-b523-4a6d-a9d5-bbc3696b8b89",
+      "name": "WhatsApp Trigger",
+      "webhookId": "51cc5575-4093-4d14-9d18-26e51dea1d34",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "SiP2MuJnvBzcYLPD",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -912,
+        -512
+      ],
+      "id": "dff329a1-57fe-4ec9-bd54-841885ef9774",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -960,
+        -288
+      ],
+      "id": "97d409b2-07d9-4407-8009-263c56cf8a98",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Yp2QtVo2PhGfc1DY",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1foZpRcBQbnQEpUUT82mEQyDcSUp__8RqE7QwKLpqhQE",
+          "mode": "list",
+          "cachedResultName": "Copy of Loan_Customers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1foZpRcBQbnQEpUUT82mEQyDcSUp__8RqE7QwKLpqhQE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1foZpRcBQbnQEpUUT82mEQyDcSUp__8RqE7QwKLpqhQE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone Number": "923001234567",
+            "Name": "Ali Khan",
+            "Loan ID": "L-001",
+            "Loan Type": "Personal",
+            "Loan Status": "Active",
+            "Total Loan (PKR)": "100,000",
+            "Amount Paid (PKR)": "88,000",
+            "Outstanding (PKR)": "12,000",
+            "EMI Amount (PKR)": "6,000",
+            "Next EMI Date": "25 Oct 2025",
+            "Last Payment Date": "25 Sep 2025",
+            "Loan_Customers": "2,500",
+            "Notes": "Regular payer"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan ID",
+              "displayName": "Loan ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan Type",
+              "displayName": "Loan Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan Status",
+              "displayName": "Loan Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Total Loan (PKR)",
+              "displayName": "Total Loan (PKR)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Amount Paid (PKR)",
+              "displayName": "Amount Paid (PKR)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Outstanding (PKR)",
+              "displayName": "Outstanding (PKR)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "EMI Amount (PKR)",
+              "displayName": "EMI Amount (PKR)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Next EMI Date",
+              "displayName": "Next EMI Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Last Payment Date",
+              "displayName": "Last Payment Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Loan_Customers",
+              "displayName": "Loan_Customers",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -448,
+        -528
+      ],
+      "id": "9da12654-c0df-4eef-96be-76f58f6824ad",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "PT6SGOA84qkFP5Ks",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "764796730059348",
+        "recipientPhoneNumber": "923377136469",
+        "textBody": "={{ $('AI Agent').item.json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        -192,
+        -528
+      ],
+      "id": "8e8dffce-9170-4b77-b93f-536651be0296",
+      "name": "Send message",
+      "webhookId": "ab8df769-c478-422e-ac28-011fc6c6376a",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "qPMUM0aJs836OHjg",
+          "name": "WhatsApp account 3"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        48
+      ],
+      "id": "d0f60906-ff73-4e1e-a4ad-66ff845794ea",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Use this tool to search the bank’s document database for relevant information about loans, bank policies, account services, and customer support guidelines. \nWhenever a user asks about loans, repayment status, or bank procedures, retrieve the most relevant documents from Supabase to generate an accurate answer.\n",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -704,
+        -272
+      ],
+      "id": "7bb8f2f0-f799-4067-8848-1ac4dcd3e743",
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "id": "nSZfST8SEGjXp9vZ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -688,
+        336
+      ],
+      "id": "73ba4858-d3d8-4f82-b838-ea59ad6a731d",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "Yp2QtVo2PhGfc1DY",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1foZpRcBQbnQEpUUT82mEQyDcSUp__8RqE7QwKLpqhQE",
+          "mode": "list",
+          "cachedResultName": "Copy of Loan_Customers",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1foZpRcBQbnQEpUUT82mEQyDcSUp__8RqE7QwKLpqhQE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1foZpRcBQbnQEpUUT82mEQyDcSUp__8RqE7QwKLpqhQE/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1328,
+        48
+      ],
+      "id": "190e6aed-8c6e-47d5-a36c-7b8e7fc68dc0",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "g0N0gho97z8cK1bi",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  text: `Customer ${$json[\"Name\"]} with phone ${$json[\"Phone Number\"]} has a ${$json[\"Loan Type\"]} loan (ID: ${$json[\"Loan ID\"]}). \n  Status: ${$json[\"Loan Status\"]}. Total loan: ${$json[\"Total Loan (PKR)\"]} PKR. \n  Notes: ${$json[\"Notes\"] || \"No additional notes.\"}`\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1120,
+        48
+      ],
+      "id": "5c403fc6-7765-4f2b-8158-014c75b8464b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        -400,
+        -32
+      ],
+      "id": "ae637568-27d2-4a5e-a62f-8b0765b6b933",
+      "name": "Supabase Vector Store1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "nSZfST8SEGjXp9vZ",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -288,
+        224
+      ],
+      "id": "8af763de-6cad-4673-baa7-481b8ae57918",
+      "name": "Default Data Loader"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store1",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "187b1063-2c17-4903-99d8-bf29a2737ac9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "833a4a1e8a520c3fe1c6e2f20ddd97cdb804873e85dc8711ea517b9a2c206a6a"
+  },
+  "id": "io21ED1bMM981N4d",
+  "tags": []
+}
